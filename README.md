@@ -28,7 +28,7 @@
 - `app.py`: 主程式
 
 ## Data Exploration
-- 我使用台電公佈的過去電力供需資訊，有兩個檔案，一個包含2017-2018年的資料，一個包含2018-2019年的資料，由於2018年有重疊，因此我將其中一個2018年份資訊刪掉，得到`Data/2017.csv` 和 `Data/2018-19.csv` 兩個檔案，之後我發現資料欄位裡的中文字會造成在server上產生亂碼，導致無法執行程式，因此我將資料集裡的中文都先改成英文。
+- 我使用[台電公佈的過去電力供需資訊](https://data.gov.tw/dataset/19995)，有兩個檔案，一個包含2017-2018年的資料，一個包含2018-2019年的資料，由於2018年有重疊，因此我將其中一個2018年份資訊刪掉，得到`Data/2017.csv` 和 `Data/2018-19.csv` 兩個檔案，之後我發現資料欄位裡的中文字會造成在server上產生亂碼，導致無法執行程式，因此我將資料集裡的中文都先改成英文。
 
 ## Feature Selection
 - 在台電公佈的電力資訊中，我認為`淨尖峰供電能力(MW)`應該會是一個很準確的feature，因為這是台電根據自身發電機組狀況、天氣、各種環境條件下，所評估出的應具備供電能力，所以，如果拿它來當training data應該會很準確。
@@ -36,7 +36,7 @@
 - 因此我將`Data/2018-19.csv`和`Data/2018-19.csv`中的`Power_Supply(MW)`欄位當作x_train、`Peak_Load(MW)`當作y_train。
 
 ## Result
-- 將`Power_Supply(MW)`都讀進x_train、`Peak_Load(MW)`都讀進y_train後，我將它們轉成np.array，並使用`next_week_data/next_week.csv`(台電未來一週電力預測)中的'預估淨尖峰供電能力(萬瓩)'當作x_test(在程式碼中我命名為x_next)，並將'預估瞬時尖峰負載(萬瓩)'當作y_test(在程式碼中我命名為y_next)以進行驗證RMSE。
+- 將`Power_Supply(MW)`都讀進x_train、`Peak_Load(MW)`都讀進y_train後，我將它們轉成np.array，並使用`next_week_data/next_week.csv`([台電未來一週電力預測](https://data.gov.tw/dataset/33462))中的'預估淨尖峰供電能力(萬瓩)'當作x_test(在程式碼中我命名為x_next)，並將'預估瞬時尖峰負載(萬瓩)'當作y_test(在程式碼中我命名為y_next)以進行驗證RMSE。
 
 
 - 接下來我嘗試了Linear Regression、SVM model中的各種kernel，發現若使用SVM model，kernel設為'poly'，且degree設為9時，平均的RMSE表現會最好，因此我最後是使用SVM model 參數設為：kernel='poly', max_iter=20000, gamma='scale', C=1.0, degree=9。
@@ -114,3 +114,6 @@ RMSE:
  165.92123776918115
 
 ```
+
+## Authors
+[Cheng-Da Wen](https://github.com/jeremywen0202)
