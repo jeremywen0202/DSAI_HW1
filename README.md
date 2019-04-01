@@ -1,4 +1,5 @@
 # DSAI
+- [View on jupyter notebooks](https://nbviewer.jupyter.org/github/jeremywen0202/DSAI_HW1/blob/master/forecasting.ipynb)
 ###### tags: `DSAI`
 ## HW1
 - 温承達
